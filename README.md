@@ -54,7 +54,7 @@ parkiuc/
     ├── iucpark/
     │   ├── model/
     │   │   ├── Vehicle.java        # Abstract class for vehicles
-    │   │   └── Motorbike.java      # Concrete motorbike class
+    │   │   └── Motorbike.java      # Motorbike class
     │   ├── manager/
     │   │   ├── RecordManager.java  # Interface for record management
     │   │   └── Iuc_Park_Main.java  # Main system logic and menu
