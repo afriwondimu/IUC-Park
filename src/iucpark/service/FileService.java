@@ -25,7 +25,7 @@ public class FileService { // Manages CSV operations
         try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE))) { // Opens CSV
             String line; // Stores line
             reader.readLine(); // Skips header
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // Date-time formatter
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); 
             while ((line = reader.readLine()) != null) { // Reads lines
                 String[] parts = line.split(",", -1); // Splits by commas
                 if (parts.length >= 4) { // Checks for 4 fields
@@ -46,7 +46,7 @@ public class FileService { // Manages CSV operations
                 }
             }
         } catch (IOException e) { // Handles file errors
-            System.out.println("No records found in CSV file."); // Prints error
+            System.out.println("No records found in CSV file."); 
         }
     }
 
@@ -59,7 +59,7 @@ public class FileService { // Manages CSV operations
                 writer.write(String.format("%d,%d,%s,%s\n", m.getCouponCode(), m.getPlateNumber(), m.getCheckInTime().format(formatter), checkOutTime)); // Writes row
             }
         } catch (IOException e) { // Handles file errors
-            System.out.println("Error saving to CSV: " + e.getMessage()); // Prints error
+            System.out.println("Error saving to CSV: " + e.getMessage()); 
         }
     }
 }
