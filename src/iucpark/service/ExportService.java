@@ -7,11 +7,11 @@ import java.time.format.DateTimeFormatter; // Formats date-time
 import java.util.ArrayList; // Stores vehicles
 
 public class ExportService { // Handles export logic
-    private final FileService fileService; // Manages file operations
+    private final FileService fileService; 
     private final ArrayList<Motorbike> vehicles; // Stores vehicles
 
     public ExportService(FileService fileService) { // Constructor
-        this.fileService = fileService; // Sets file service
+        this.fileService = fileService; 
         this.vehicles = fileService.getVehicles(); // Loads vehicles
     }
 
@@ -21,16 +21,16 @@ public class ExportService { // Handles export logic
             String fileName = plateNumber == null ? "records_" + date + ".txt" : "records_" + date + "_" + plateNumber + ".txt"; // Sets file name
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // Date-time formatter
             try (FileWriter writer = new FileWriter(fileName)) { // Opens export file
-                writer.write("+-------+--------+---------------------+---------------------+\n"); // Writes header
-                writer.write("| Plate | Coupon | Check-in            | Check-out           |\n"); // Writes columns
-                writer.write("+-------+--------+---------------------+---------------------+\n"); // Writes border
+                writer.write("+-------+--------+---------------------+---------------------+\n"); 
+                writer.write("| Plate | Coupon | Check-in            | Check-out           |\n");
+                writer.write("+-------+--------+---------------------+---------------------+\n"); 
 
                 boolean hasRecords = false; // Tracks records
-                for (Motorbike m : vehicles) { // Loops through vehicles
+                for (Motorbike m : vehicles) { 
                     if (m.getCheckInTime().toLocalDate().equals(targetDate)) { // Checks date
                         if (plateNumber == null || m.getPlateNumber() == plateNumber) { // Checks plate
-                            String checkOut = m.getCheckOutTime() != null ? m.getCheckOutTime().format(formatter) : "Not checked out"; // Formats check-out
-                            writer.write(String.format("| %-5d | %-6d | %-19s | %-19s |\n", m.getPlateNumber(), m.getCouponCode(), m.getCheckInTime().format(formatter), checkOut)); // Writes row
+                            String checkOut = m.getCheckOutTime() != null ? m.getCheckOutTime().format(formatter) : "Not checked out"; 
+                            writer.write(String.format("| %-5d | %-6d | %-19s | %-19s |\n", m.getPlateNumber(), m.getCouponCode(), m.getCheckInTime().format(formatter), checkOut)); /
                             hasRecords = true; // Marks record found
                         }
                     }
@@ -40,7 +40,7 @@ public class ExportService { // Handles export logic
                     System.out.println(msg); // Prints message
                     return; // Exits
                 }
-                writer.write("+-------+--------+---------------------+---------------------+\n"); // Writes footer
+                writer.write("+-------+--------+---------------------+---------------------+\n"); 
                 System.out.println("Exported to " + fileName); // Prints success
             } catch (IOException e) { // Handles file errors
                 System.out.println("Error writing to file: " + e.getMessage()); // Prints error
