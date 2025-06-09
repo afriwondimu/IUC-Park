@@ -8,7 +8,7 @@ public class Motorbike extends Vehicle { // Represents motorbike records
 
     public Motorbike(int couponCode, int plateNumber, LocalDateTime checkInTime) { // Constructor
         super(couponCode, plateNumber, checkInTime); // Calls Vehicle constructor
-        this.checkOutTime = null; // Sets check-out to null
+        this.checkOutTime = null; 
     }
 
     public LocalDateTime getCheckOutTime() { return checkOutTime; } // Returns check-out time
