@@ -5,12 +5,12 @@ import java.util.Scanner; // Reads user input
 import java.time.LocalDateTime; // Represents date-time
 
 public class CheckOutService { // Handles check-out logic
-    private final FileService fileService; // Manages file operations
-    private final ArrayList<Motorbike> vehicles; // Stores vehicles
-    private final boolean[] couponAvailability = new boolean[300]; // Tracks coupons
+    private final FileService fileService; 
+    private final ArrayList<Motorbike> vehicles; 
+    private final boolean[] couponAvailability = new boolean[300]; 
 
     public CheckOutService(FileService fileService) { // Constructor
-        this.fileService = fileService; // Sets file service
+        this.fileService = fileService; 
         this.vehicles = fileService.getVehicles(); // Loads vehicles
         for (int i = 0; i < 300; i++) { // Loops through coupons
             couponAvailability[i] = true; // Marks coupons available
@@ -30,19 +30,19 @@ public class CheckOutService { // Handles check-out logic
     }
 
     public void checkOut(int couponCode, Scanner scanner) { // Records check-out
-        if (couponCode < 1 || couponCode > 300) { // Checks coupon range
-            System.out.println("Invalid coupon."); // Prints error
+        if (couponCode < 1 || couponCode > 300) { 
+            System.out.println("Invalid coupon."); 
             return; // Exits
         }
         for (int i = vehicles.size() - 1; i >= 0; i--) { // Loops backward
-            Motorbike m = vehicles.get(i); // Gets motorbike
+            Motorbike m = vehicles.get(i);
             if (m.getCouponCode() == couponCode && m.getCheckOutTime() == null) { // Checks coupon and status
                 System.out.println("Plate: " + m.getPlateNumber()); // Shows plate
-                System.out.print("Confirm (y/n): "); // Prompts confirmation
-                if (scanner.nextLine().equalsIgnoreCase("y")) { // Checks confirmation
+                System.out.print("Confirm (y/n): ");
+                if (scanner.nextLine().equalsIgnoreCase("y")) { 
                     m.setCheckOutTime(LocalDateTime.now()); // Sets check-out time
                     int index = couponCode - 1; // Converts coupon to index
-                    couponAvailability[index] = true; // Marks coupon available
+                    couponAvailability[index] = true; 
                     fileService.saveToCSV(vehicles); // Saves to CSV
                     System.out.println("Check-out: " + m.getDetails()); // Prints details
                 } else {
@@ -51,6 +51,6 @@ public class CheckOutService { // Handles check-out logic
                 return; // Exits
             }
         }
-        System.out.println("No active record for coupon " + couponCode); // Prints error
+        System.out.println("No active record for coupon " + couponCode); 
     }
 }
