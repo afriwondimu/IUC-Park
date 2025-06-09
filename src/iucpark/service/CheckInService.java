@@ -4,15 +4,15 @@ import java.time.LocalDateTime; // Represents date-time
 import java.util.ArrayList; // Stores vehicles
 
 public class CheckInService { // Handles check-in logic
-    private final FileService fileService; // Manages file operations
-    private final ArrayList<Motorbike> vehicles; // Stores vehicles
-    private final boolean[] couponAvailability = new boolean[300]; // Tracks coupons
+    private final FileService fileService; 
+    private final ArrayList<Motorbike> vehicles; 
+    private final boolean[] couponAvailability = new boolean[300]; 
 
     public CheckInService(FileService fileService) { // Constructor
-        this.fileService = fileService; // Sets file service
-        this.vehicles = fileService.getVehicles(); // Loads vehicles
-        for (int i = 0; i < 300; i++) { // Loops through coupons
-            couponAvailability[i] = true; // Marks coupons available
+        this.fileService = fileService; 
+        this.vehicles = fileService.getVehicles(); 
+        for (int i = 0; i < 300; i++) { 
+            couponAvailability[i] = true; 
         }
         updateCouponAvailability(); // Updates coupon status
     }
@@ -29,8 +29,8 @@ public class CheckInService { // Handles check-in logic
     }
 
     private boolean isCouponInUse(int couponCode) { // Checks if coupon in use
-        for (Motorbike m : vehicles) { // Loops through vehicles
-            if (m.getCouponCode() == couponCode && m.getCheckOutTime() == null) { // Checks coupon and status
+        for (Motorbike m : vehicles) { 
+            if (m.getCouponCode() == couponCode && m.getCheckOutTime() == null) { 
                 return true; // Coupon is used
             }
         }
@@ -38,16 +38,16 @@ public class CheckInService { // Handles check-in logic
     }
 
     public void checkIn(int couponCode, int plateNumber) { // Records check-in
-        if (couponCode < 1 || couponCode > 300) { // Checks coupon range
-            System.out.println("Coupon out of range (001-300)."); // Prints error
+        if (couponCode < 1 || couponCode > 300) {
+            System.out.println("Coupon out of range (001-300)."); 
             return; // Exits
         }
         if (isCouponInUse(couponCode)) { // Checks if coupon in use
-            System.out.println("Coupon in use."); // Prints error
+            System.out.println("Coupon in use."); 
             return; // Exits
         }
         if (plateNumber <= 0) { // Checks plate number
-            System.out.println("Plate cannot be empty or negative."); // Prints error
+            System.out.println("Plate cannot be empty or negative."); 
             return; // Exits
         }
         int index = couponCode - 1; // Converts coupon to index
